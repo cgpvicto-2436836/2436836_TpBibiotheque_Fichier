@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Épreuve finale - Services Web H26</title>
+    <script defer src="./js/script.js"></script>
+    <link rel="stylesheet" href="./css/styles.css">
+</head>
+
+<body>
+    <header>
+        <h1>Épreuve finale - Services Web H26</h1>
+        <p>Maxime Vallières</p>
+    </header>
+
+    <body>
+        <div class="container">
+            <section class="column">
+                <h2>Création d'une bibliothèque</h2>
+                <form id="formulaire-inscription">
+                    <div class="form-group">
+                        <label>Nom de la bibliothèque</label>
+                        <input type="text" id="inscription-nom" placeholder="Votre bibliothèque" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Courriel</label>
+                        <input type="email" id="inscription-courriel" placeholder="Votre courriel" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Mot de passe</label>
+                        <input type="password" id="inscription-mdp" placeholder="********" required>
+                    </div>
+                    <div id="msg-inscription" class="message"></div>
+                    <div id="cle-inscription" class="cle-box">
+                        Clé API : <strong id="valeur-cle-inscription"></strong>
+                    </div>
+                    <div class="button-container">
+                        <button type="submit" id="btn-inscription">Créer le compte</button>
+                    </div>
+                </form>
+            </section>
+
+            <div class="divider"></div>
+
+            <section class="column">
+                <h2>Récupération d'une clé api</h2>
+                <form id="formulaire-cle">
+                    <div class="form-group">
+                        <label>Courriel</label>
+                        <input type="email" id="cle-courriel" placeholder="Votre courriel" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Mot de passe</label>
+                        <input type="password" id="cle-mdp" placeholder="********" required>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="cle-nouveau"> Générer une nouvelle clé
+                        </label>
+                    </div>
+                    <div id="msg-cle" class="message"></div>
+                    <div id="cle-recuperee" class="cle-box">
+                        Clé API : <strong id="valeur-cle-recuperee"></strong>
+                    </div>
+                    <div class="button-container">
+                        <button type="submit" id="btn-cle">Récupérer la clé</button>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </body>
+</html>

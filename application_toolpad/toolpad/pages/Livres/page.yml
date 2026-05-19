@@ -1,0 +1,333 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mui/toolpad/v0.11.0/docs/schemas/v1/definitions.json#properties/Page
+
+apiVersion: v1
+kind: page
+spec:
+  title: Livres
+  queries:
+    - name: getLivres
+      mode: query
+      query:
+        kind: rest
+        url: https://two436836-tpbibiotheque-serviceweb.onrender.com/api/livres
+        searchParams: [{ name: tous, value: "true" }]
+        headers:
+          - name: Authorization
+            value: cle_api cle-test-123
+        method: GET
+
+    - name: modifierLivre
+      mode: mutation
+      query:
+        kind: rest
+        url:
+          $$jsExpression:
+            "`https://two436836-tpbibiotheque-serviceweb.onrender.com/api/l\
+            ivres/${parameters}`"
+        searchParams: []
+        headers:
+          - name: Authorization
+            value: cle_api cle-test-123
+          - name: Content-Type
+            value: application/json;charset=utf-8
+        method: PUT
+        body:
+          kind: raw
+          content:
+            $$jsExpression: "JSON.stringify({titre: parameters.titre, auteur:
+              parameters.auteur, isbn: parameters.isbn, description:
+              parameters.description})"
+          contentType: application/json
+      parameters:
+        - name: id
+          value:
+            $$jsExpression: dataGrid.selection?.id ?? 0
+        - name: titre
+          value:
+            $$jsExpression: titre.value
+        - name: auteur
+          value:
+            $$jsExpression: auteur.value
+        - name: isbn
+          value:
+            $$jsExpression: isbn.value
+        - name: description
+          value:
+            $$jsExpression: description.value
+
+    - name: modifierStatutLivre
+      mode: mutation
+      query:
+        kind: rest
+        url:
+          $$jsExpression:
+            "`https://two436836-tpbibiotheque-serviceweb.onrender.com/api/l\
+            ivres/${parameters.id}/statut`"
+        searchParams: []
+        headers:
+          - name: Authorization
+            value: cle_api cle-test-123
+          - name: Content-Type
+            value: application/json;charset=utf-8
+        body:
+          kind: raw
+          content:
+            $$jsExpression: "JSON.stringify({statut: parameters.statut})"
+          contentType: application/json
+        method: PATCH
+      parameters:
+        - name: id
+          value:
+            $$jsExpression: dataGrid.selection?.id ?? 0
+        - name: statut
+          value:
+            $$jsExpression: statut.value
+
+    - name: supprimerLivre
+      mode: mutation
+      query:
+        kind: rest
+        url:
+          $$jsExpression:
+            "`https://two436836-tpbibliotheque-serviceweb.onrender.com/api/\
+            livres/${parameters.id}`"
+        searchParams: []
+        headers:
+          - name: Authorization
+            value: cle_api cle-test-123
+        method: DELETE
+      parameters:
+        - name: id
+          value:
+            $$jsExpression: dataGrid.selection?.id ?? 0
+
+  content:
+    - component: Text
+      name: sources
+      props:
+        value:
+          "Aide de : https://mui.com/toolpad/studio/concepts/data-binding/ le 17
+          mai 2026, & Notes de cours de Services Web 2026"
+        variant: body2
+
+    - component: Text
+      name: titrePage
+      layout:
+        columnSize: 1
+      props:
+        variant: h1
+        value: Liste des livres
+
+    - component: DataGrid
+      name: dataGrid
+      props:
+        rows:
+          $$jsExpression: getLivres.data
+        rowsSource: prop
+        columns:
+          - field: id
+            type: number
+          - field: titre
+            type: string
+          - field: auteur
+            type: string
+          - field: isbn
+            type: string
+          - field: statut
+            type: string
+          - field: description
+            type: string
+            width: 206
+          - field: ajoute_le
+            type: dateTime
+      layout:
+        height: 350
+
+    - component: Button
+      name: btnRefresh
+      props:
+        variant: contained
+        content: Rafraîchir la liste
+        color: primary
+        onClick:
+          $$jsExpressionAction: getLivres.refetch()
+
+    - component: Text
+      name: titreModifier
+      props:
+        variant: h2
+        value: "Modifier le livre sélectionné :"
+      layout:
+        columnSize: 1
+
+    - component: Text
+      name: txtSelectionneModifier
+      props:
+        variant: body1
+        value:
+          $$jsExpression:
+            "`Sélectionné : ${dataGrid.selection?.titre ?? 'aucun'} (ID:
+            ${dataGrid.selection?.id ?? '-'})`"
+
+    - component: PageRow
+      name: rowTitre
+      props:
+        justifyContent: start
+      children:
+        - component: Text
+          name: titreLabel
+          layout:
+            columnSize: 0.66
+            verticalAlign: center
+          props:
+            variant: h3
+            value: "Titre:"
+        - component: TextField
+          name: titre
+          layout:
+            columnSize: 1.34
+          props:
+            fullWidth: true
+            value:
+              $$jsExpression: dataGrid.selection?.titre ?? ""
+
+    - component: PageRow
+      name: rowAuteur
+      props:
+        justifyContent: start
+      children:
+        - component: Text
+          name: auteurLabel
+          layout:
+            columnSize: 0.66
+            verticalAlign: center
+          props:
+            variant: h3
+            value: "Auteur:"
+        - component: TextField
+          name: auteur
+          layout:
+            columnSize: 1.34
+          props:
+            fullWidth: true
+            value:
+              $$jsExpression: dataGrid.selection?.auteur ?? ""
+
+    - component: PageRow
+      name: rowIsbn
+      props:
+        justifyContent: start
+      children:
+        - component: Text
+          name: isbnLabel
+          layout:
+            columnSize: 0.66
+            verticalAlign: center
+          props:
+            variant: h3
+            value: "ISBN:"
+        - component: TextField
+          name: isbn
+          layout:
+            columnSize: 1.34
+          props:
+            fullWidth: true
+            value:
+              $$jsExpression: dataGrid.selection?.isbn ?? ""
+
+    - component: PageRow
+      name: rowDescription
+      props:
+        justifyContent: start
+      children:
+        - component: Text
+          name: descriptionLabel
+          layout:
+            columnSize: 0.66
+            verticalAlign: center
+          props:
+            variant: h3
+            value: "Description:"
+        - component: TextField
+          name: description
+          layout:
+            columnSize: 1.34
+          props:
+            fullWidth: true
+            value:
+              $$jsExpression: dataGrid.selection?.description ?? ""
+
+    - component: Button
+      name: btnModifier
+      props:
+        fullWidth: true
+        content: Modifier le livre
+        variant: contained
+        color: primary
+        onClick:
+          $$jsExpressionAction: modifierLivre.call().then(() => getLivres.refetch())
+
+    - component: Text
+      name: titreStatut
+      props:
+        variant: h2
+        value: "Modifier le statut :"
+      layout:
+        columnSize: 1
+
+    - component: PageRow
+      name: rowStatut
+      props:
+        justifyContent: start
+      children:
+        - component: Text
+          name: statutLabel
+          layout:
+            columnSize: 0.66
+            verticalAlign: center
+          props:
+            variant: h3
+            value: "Statut (disponible / emprunté):"
+        - component: TextField
+          name: statut
+          layout:
+            columnSize: 1.34
+          props:
+            fullWidth: true
+            value:
+              $$jsExpression: dataGrid.selection?.statut ?? ""
+
+    - component: Button
+      name: btnStatut
+      props:
+        fullWidth: true
+        content: Modifier le statut
+        variant: contained
+        color: primary
+        onClick:
+          $$jsExpressionAction: modifierStatutLivre.call().then(() => getLivres.refetch())
+
+    - component: Text
+      name: titreSupprimer
+      props:
+        variant: h2
+        value: "Supprimer le livre sélectionné :"
+      layout:
+        columnSize: 1
+    - component: Text
+      name: txtSelectionneSupprimer
+      props:
+        variant: body1
+        value:
+          $$jsExpression:
+            "`Sélectionné : ${dataGrid.selection?.titre ?? 'aucun'} (ID:
+            ${dataGrid.selection?.id ?? '-'})`"
+    - component: Button
+      name: btnSupprimer
+      props:
+        variant: contained
+        fullWidth: true
+        content: Supprimer le livre
+        color: primary
+        onClick:
+          $$jsExpressionAction: supprimerLivre.call().then(() => getLivres.refetch())

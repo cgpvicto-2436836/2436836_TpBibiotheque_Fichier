@@ -1,0 +1,145 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mui/toolpad/v0.11.0/docs/schemas/v1/definitions.json#properties/Page
+
+apiVersion: v1
+kind: page
+spec:
+  title: Ajouter un livre
+  queries:
+    - name: ajouterLivre
+      mode: mutation
+      query:
+        kind: rest
+        url: https://two436836-tpbibiotheque-serviceweb.onrender.com/api/livres
+        searchParams: []
+        headers:
+          - name: Authorization
+            value: cle_api cle-test-123
+          - name: Content-Type
+            value: application/json;charset=utf-8
+        body:
+          kind: raw
+          content:
+            $$jsExpression: "JSON.stringify({titre: parameters.titre, auteur:
+              parameters.auteur, isbn: parameters.isbn, description:
+              parameters.description})"
+          contentType: application/json
+        method: POST
+      parameters:
+        - name: titre
+          value:
+            $$jsExpression: titre.value
+        - name: auteur
+          value:
+            $$jsExpression: auteur.value
+        - name: isbn
+          value:
+            $$jsExpression: isbn.value
+        - name: description
+          value:
+            $$jsExpression: description.value
+
+  content:
+    - component: Text
+      name: sources
+      props:
+        value:
+          "Aide de : https://mui.com/toolpad/studio/concepts/data-binding/ le 17
+          mai 2026 & Notes de cours de Services Web 2026"
+        variant: body2
+
+    - component: Text
+      name: titrePage
+      props:
+        variant: h1
+        value: Ajouter un livre
+      layout:
+        columnSize: 1
+
+    - component: PageRow
+      name: rowTitre
+      props:
+        justifyContent: start
+      children:
+        - component: Text
+          name: titreLabel
+          layout:
+            columnSize: 0.66
+            verticalAlign: center
+          props:
+            variant: h3
+            value: "Titre:"
+        - component: TextField
+          name: titre
+          layout:
+            columnSize: 1.34
+          props:
+            fullWidth: true
+
+    - component: PageRow
+      name: rowAuteur
+      props:
+        justifyContent: start
+      children:
+        - component: Text
+          name: auteurLabel
+          layout:
+            columnSize: 0.66
+            verticalAlign: center
+          props:
+            variant: h3
+            value: "Auteur:"
+        - component: TextField
+          name: auteur
+          layout:
+            columnSize: 1.34
+          props:
+            fullWidth: true
+
+    - component: PageRow
+      name: rowIsbn
+      props:
+        justifyContent: start
+      children:
+        - component: Text
+          name: isbnLabel
+          layout:
+            columnSize: 0.66
+            verticalAlign: center
+          props:
+            variant: h3
+            value: "ISBN:"
+        - component: TextField
+          name: isbn
+          layout:
+            columnSize: 1.34
+          props:
+            fullWidth: true
+
+    - component: PageRow
+      name: rowDescription
+      props:
+        justifyContent: start
+      children:
+        - component: Text
+          name: descriptionLabel
+          layout:
+            columnSize: 0.66
+            verticalAlign: center
+          props:
+            variant: h3
+            value: "Description:"
+        - component: TextField
+          name: description
+          layout:
+            columnSize: 1.34
+          props:
+            fullWidth: true
+    - component: Button
+      name: btnAjouter
+      props:
+        fullWidth: true
+        content: Ajouter le livre
+        variant: contained
+        color: primary
+        onClick:
+          $$jsExpressionAction: ajouterLivre.call()

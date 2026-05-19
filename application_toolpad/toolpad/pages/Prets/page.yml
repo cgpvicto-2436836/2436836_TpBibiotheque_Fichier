@@ -1,0 +1,354 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mui/toolpad/v0.11.0/docs/schemas/v1/definitions.json#properties/Page
+
+apiVersion: v1
+kind: page
+spec:
+  title: Prêts
+  queries:
+    - name: ajouterPret
+      mode: mutation
+      query:
+        kind: rest
+        url:
+          $$jsExpression:
+            "`https://two436836-tpbibiotheque-serviceweb.onrender.com/api/l\
+            ivres/${parameters.livreId}/prets`"
+        searchParams: []
+        headers:
+          - name: Authorization
+            value: cle_api cle-test-123
+          - name: Content-Type
+            value: application/json;charset=utf-8
+        body:
+          kind: raw
+          content:
+            $$jsExpression:
+              "JSON.stringify({nom_emprunteur: parameters.nom_emprunteur,
+              date_retour_prevue: parameters.date_retour_prevue})"
+          contentType: application/json
+        method: POST
+      parameters:
+        - name: livreId
+          value:
+            $$jsExpression: livreId.value
+        - name: nomEmprunteur
+          value:
+            $$jsExpression: nomEmprunteur.value
+        - name: dateRetour
+          value:
+            $$jsExpression: dateRetour.value
+
+    - name: modifierPret
+      mode: mutation
+      query:
+        kind: rest
+        url:
+          $$jsExpression:
+            "`https://two436836-tpbibiotheque-serviceweb.onrender.com/api/p\
+            rets/${parameters.idPret}`"
+        searchParams: []
+        headers:
+          - name: Authorization
+            value: cle_api cle-test-123
+          - name: Content-Type
+            value: application/json;charset=utf-8
+        body:
+          kind: raw
+          content:
+            $$jsExpression:
+              "JSON.stringify({nom_emprunteur: parameters.nom_emprunteur,
+              date_retour_prevue: parameters.date_retour_prevue})"
+          contentType: application/json
+        method: PUT
+      parameters:
+        - name: idPret
+          value:
+            $$jsExpression: idPret.value
+        - name: nomEmprunteurModif
+          value:
+            $$jsExpression: nomEmprunteurModif.value
+        - name: dateRetourModif
+          value:
+            $$jsExpression: dateRetourModif.value
+
+    - name: modifierStatutPret
+      mode: mutation
+      query:
+        kind: rest
+        url:
+          $$jsExpression:
+            "`https://two436836-tpbibiotheque-serviceweb.onrender.com/api/p\
+            rets/${parameters.idStatutPret}/statut`"
+        searchParams: []
+        headers:
+          - name: Authorization
+            value: cle_api cle-test-123
+          - name: Content-Type
+            value: application/json;charset=utf-8
+        body:
+          kind: raw
+          content:
+            $$jsExpression: "JSON.stringify({est_termine: true})"
+          contentType: application/json
+        method: PATCH
+      parameters:
+        - name: idStatutPret
+          value:
+            $$jsExpression: idStatutPret.value
+
+    - name: supprimerPret
+      mode: mutation
+      query:
+        kind: rest
+        url:
+          $$jsExpression:
+            "`https://two436836-tpbibiotheque-serviceweb.onrender.com/api/p\
+            rets/${parameters.idSupprimerPret}`"
+        searchParams: []
+        headers:
+          - name: Authorization
+            value: cle_api cle-test-123
+        method: DELETE
+      parameters:
+        - name: idSupprimerPret
+          value:
+            $$jsExpression: idSupprimerPret.value
+
+  content:
+    - component: Text
+      name: Sources
+      props:
+        value:
+          "Aide de : https://mui.com/toolpad/studio/concepts/data-binding/ le 17
+          mai 2026 & Notes de cours de Services Web 2026"
+        variant: body2
+
+    - component: Text
+      name: titreAjouter
+      props:
+        variant: h1
+        value: Ajouter un prêt
+      layout:
+        columnSize: 1
+
+    - component: PageRow
+      name: rowLivreId
+      props:
+        justifyContent: start
+      children:
+        - component: Text
+          name: livreIdLabel
+          layout:
+            columnSize: 0.66
+            verticalAlign: center
+          props:
+            variant: h3
+            value: "ID du livre:"
+        - component: TextField
+          name: livreId
+          layout:
+            columnSize: 1.34
+          props:
+            fullWidth: true
+
+    - component: PageRow
+      name: rowNomEmprunteur
+      props:
+        justifyContent: start
+      children:
+        - component: Text
+          name: nomEmprunteurLabel
+          layout:
+            columnSize: 0.66
+            verticalAlign: center
+          props:
+            variant: h3
+            value: "Nom emprunteur:"
+        - component: TextField
+          name: nomEmprunteur
+          layout:
+            columnSize: 1.34
+          props:
+            fullWidth: true
+
+    - component: PageRow
+      name: pageRow
+      props:
+        justifyContent: start
+      children:
+        - component: Text
+          name: dateRetourLabel
+          layout:
+            columnSize: 0.6604251063144166
+          props:
+            variant: h3
+            value: Date de Retour
+        - component: TextField
+          name: dateRetour
+          layout:
+            columnSize: 1.3395748936855834
+          props:
+            fullWidth: true
+
+    - component: Button
+      name: btnAjouterPret
+      props:
+        variant: contained
+        fullWidth: true
+        content: Ajouter le prêt
+        color: primary
+        onClick:
+          $$jsExpressionAction: ajouterPret.call()
+
+    - component: Text
+      name: titreModifier
+      props:
+        variant: h1
+        value: Modifier un prêt
+      layout:
+        columnSize: 1
+
+    - component: PageRow
+      name: rowIdPret
+      props:
+        justifyContent: start
+      children:
+        - component: Text
+          name: idPretLabel
+          layout:
+            columnSize: 0.66
+            verticalAlign: center
+          props:
+            variant: h3
+            value: "ID du prêt:"
+        - component: TextField
+          name: idPret
+          layout:
+            columnSize: 1.34
+          props:
+            fullWidth: true
+
+    - component: PageRow
+      name: rowNomEmprunteurModif
+      props:
+        justifyContent: start
+      children:
+        - component: Text
+          name: nomEmprunteurModifLabel
+          layout:
+            columnSize: 0.66
+            verticalAlign: center
+          props:
+            variant: h3
+            value: "Nom emprunteur:"
+        - component: TextField
+          name: nomEmprunteurModif
+          layout:
+            columnSize: 1.34
+          props:
+            fullWidth: true
+
+    - component: PageRow
+      name: rowDateRetourModif
+      props:
+        justifyContent: start
+      children:
+        - component: Text
+          name: dateRetourModifLabel
+          layout:
+            columnSize: 0.66
+            verticalAlign: center
+          props:
+            variant: h3
+            value: "Nouvelle date retour (AAAA-MM-JJ):"
+        - component: TextField
+          name: dateRetourModif
+          layout:
+            columnSize: 1.34
+          props:
+            fullWidth: true
+
+    - component: Button
+      name: btnModifierPret
+      props:
+        variant: contained
+        fullWidth: true
+        content: Modifier le prêt
+        color: primary
+        onClick:
+          $$jsExpressionAction: modifierPret.call()
+
+    - component: Text
+      name: titreTerminer
+      props:
+        variant: h1
+        value: Terminer un prêt
+      layout:
+        columnSize: 1
+
+    - component: PageRow
+      name: rowIdStatutPret
+      props:
+        justifyContent: start
+      children:
+        - component: Text
+          name: idStatutPretLabel
+          layout:
+            columnSize: 0.66
+            verticalAlign: center
+          props:
+            variant: h3
+            value: "ID du prêt:"
+        - component: TextField
+          name: idStatutPret
+          layout:
+            columnSize: 1.34
+          props:
+            fullWidth: true
+
+    - component: Button
+      name: btnTerminerPret
+      props:
+        variant: contained
+        fullWidth: true
+        content: Terminer le prêt
+        color: primary
+        onClick:
+          $$jsExpressionAction: modifierStatutPret.call()
+
+    - component: Text
+      name: titreSupprimer
+      props:
+        variant: h1
+        value: Supprimer un prêt
+      layout:
+        columnSize: 1
+
+    - component: PageRow
+      name: rowIdSupprimerPret
+      props:
+        justifyContent: start
+      children:
+        - component: Text
+          name: idSupprimerPretLabel
+          layout:
+            columnSize: 0.66
+            verticalAlign: center
+          props:
+            variant: h3
+            value: "ID du prêt:"
+        - component: TextField
+          name: idSupprimerPret
+          layout:
+            columnSize: 1.34
+          props:
+            fullWidth: true
+    - component: Button
+      name: btnSupprimerPret
+      props:
+        fullWidth: true
+        content: Supprimer le prêt
+        variant: contained
+        color: primary
+        onClick:
+          $$jsExpressionAction: supprimerPret.call()

@@ -1,0 +1,768 @@
+{
+  "info": {
+    "_postman_id": "3ba6c5eb-fc02-430c-9bb6-73cf8d34ae43",
+    "name": "Service Web H2026",
+    "description": "### Welcome to Postman! This is your first collection. \n\nCollections are your starting point for building and testing APIs. You can use this one to:\n\n• Group related requests\n• Test your API in real-world scenarios\n• Document and share your requests\n\nUpdate the name and overview whenever you’re ready to make it yours.\n\n[Learn more about Postman Collections.](https://learning.postman.com/docs/collections/collections-overview/)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "51576931",
+    "_collection_link": "https://go.postman.co/collection/51576931-3ba6c5eb-fc02-430c-9bb6-73cf8d34ae43?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "sw_épreuvefinale_2436836",
+      "item": [
+        {
+          "name": "CréationUsager",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"nom_bibliotheque\": \"Bibliothèque Alcide-Fleury\",\r\n  \"courriel\": \"2436836@carefour.cegepvicto.ca\",\r\n  \"mot_de_passe\": \"qwerty1234\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://two436836-tpbibiotheque-serviceweb.onrender.com/api/usagers\n",
+              "protocol": "https",
+              "host": [
+                "two436836-tpbibiotheque-serviceweb",
+                "onrender",
+                "com"
+              ],
+              "path": [
+                "api",
+                "usagers\n"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "RécupérationCléApi",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://two436836-tpbibiotheque-serviceweb.onrender.com/api/usagers/cle?courriel=admin@biblio.com&mot_de_passe=MotDePasse&nouvelle=0",
+              "protocol": "https",
+              "host": [
+                "two436836-tpbibiotheque-serviceweb",
+                "onrender",
+                "com"
+              ],
+              "path": [
+                "api",
+                "usagers",
+                "cle"
+              ],
+              "query": [
+                {
+                  "key": "courriel",
+                  "value": "admin@biblio.com"
+                },
+                {
+                  "key": "mot_de_passe",
+                  "value": "MotDePasse"
+                },
+                {
+                  "key": "nouvelle",
+                  "value": "0"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "AfficherLivre",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "cle_api cle-test-123",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "https://two436836-tpbibiotheque-serviceweb.onrender.com/api/livres?tous=true",
+              "protocol": "https",
+              "host": [
+                "two436836-tpbibiotheque-serviceweb",
+                "onrender",
+                "com"
+              ],
+              "path": [
+                "api",
+                "livres"
+              ],
+              "query": [
+                {
+                  "key": "tous",
+                  "value": "true"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "AfficherLivre Selon Id",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "cle_api cle-test-123",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "https://two436836-tpbibiotheque-serviceweb.onrender.com/api/livres/1",
+              "protocol": "https",
+              "host": [
+                "two436836-tpbibiotheque-serviceweb",
+                "onrender",
+                "com"
+              ],
+              "path": [
+                "api",
+                "livres",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "AfficherLivre Selon Id Error 401",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "cle_api cle-test-123",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "https://two436836-tpbibiotheque-serviceweb.onrender.com/api/livres/1000",
+              "protocol": "https",
+              "host": [
+                "two436836-tpbibiotheque-serviceweb",
+                "onrender",
+                "com"
+              ],
+              "path": [
+                "api",
+                "livres",
+                "1000"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Ajouter Livre",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "cle_api a074e723-fe5a-4362-9f78-c12d0304a47e",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"titre\": \"Becky Lynch: The Man: Not Your Average Average Girl\",\r\n    \"auteur\": \"Rebecca Quin\",\r\n    \"isbn\": \"1982157267\",\r\n    \"description\": \"This “infectious and contagious” (“Stone Cold” Steve Austin) New York Times bestselling memoir from WWE superstar Rebecca Quin—a.k.a. The Man, a.k.a. Becky Lynch—delves into her earliest wrestling days, her scrappy beginnings, and her meteoric rise to fame.\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://two436836-tpbibiotheque-serviceweb.onrender.com/api/livres",
+              "protocol": "https",
+              "host": [
+                "two436836-tpbibiotheque-serviceweb",
+                "onrender",
+                "com"
+              ],
+              "path": [
+                "api",
+                "livres"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Ajouter Livre Error 400",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "cle_api a074e723-fe5a-4362-9f78-c12d0304a47e",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"titre\": \"Becky Lynch: The Man: Not Your Average Average Girl\",\r\n    \"auteur\": \"Rebecca Quin\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://two436836-tpbibiotheque-serviceweb.onrender.com/api/livres",
+              "protocol": "https",
+              "host": [
+                "two436836-tpbibiotheque-serviceweb",
+                "onrender",
+                "com"
+              ],
+              "path": [
+                "api",
+                "livres"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Modifier Livre Selon Id",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "cle_api cle-test-123",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"titre\": \"Becky Lynch: The Man: Not Your Average Average Girl\",\r\n    \"auteur\": \"Rebecca Quin et Becky Lynch\",\r\n    \"isbn\": \"1982157267\",\r\n    \"description\": \"This “infectious and contagious” (“Stone Cold” Steve Austin) New York Times bestselling memoir from WWE superstar Rebecca Quin—a.k.a. The Man, a.k.a. Becky Lynch—delves into her earliest wrestling days, her scrappy beginnings, and her meteoric rise to fame.\"    \r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://two436836-tpbibiotheque-serviceweb.onrender.com/api/livres/4",
+              "protocol": "https",
+              "host": [
+                "two436836-tpbibiotheque-serviceweb",
+                "onrender",
+                "com"
+              ],
+              "path": [
+                "api",
+                "livres",
+                "4"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Surpprimer Livre Selon Id",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "cle_api cle-test-123",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://two436836-tpbibiotheque-serviceweb.onrender.com/api/livres/4",
+              "protocol": "https",
+              "host": [
+                "two436836-tpbibiotheque-serviceweb",
+                "onrender",
+                "com"
+              ],
+              "path": [
+                "api",
+                "livres",
+                "4"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Modifier le Statut d'un Livre",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "cle_api cle-test-123",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"statut\": \"emprunté\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://two436836-tpbibiotheque-serviceweb.onrender.com/api/livres/1/statut",
+              "protocol": "https",
+              "host": [
+                "two436836-tpbibiotheque-serviceweb",
+                "onrender",
+                "com"
+              ],
+              "path": [
+                "api",
+                "livres",
+                "1",
+                "statut"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Modifier Statut Livre Error 400",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "cle_api cle-test-123",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"statut\": \"\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://two436836-tpbibiotheque-serviceweb.onrender.com/api/livres/1/statut",
+              "protocol": "https",
+              "host": [
+                "two436836-tpbibiotheque-serviceweb",
+                "onrender",
+                "com"
+              ],
+              "path": [
+                "api",
+                "livres",
+                "1",
+                "statut"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Enregistrement Prets",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "cle_api cle-test-123",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"nom_emprunteur\": \"Maxime\",\r\n  \"date_retour_prevue\": \"2026-05-30\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://two436836-tpbibiotheque-serviceweb.onrender.com/api/livres/1/prets",
+              "protocol": "https",
+              "host": [
+                "two436836-tpbibiotheque-serviceweb",
+                "onrender",
+                "com"
+              ],
+              "path": [
+                "api",
+                "livres",
+                "1",
+                "prets"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Enregistrement Prets Erorr 500",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "cle_api cle-test-123",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"nom_emprunteur\": \"Maxime\",\r\n  \"date_retour_prevue\": \"Je suis une date\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://two436836-tpbibiotheque-serviceweb.onrender.com/api/livres/1/prets",
+              "protocol": "https",
+              "host": [
+                "two436836-tpbibiotheque-serviceweb",
+                "onrender",
+                "com"
+              ],
+              "path": [
+                "api",
+                "livres",
+                "1",
+                "prets"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Enregistrement  Statut Prets",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "cle_api cle-test-123",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"est_termine\": true\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://two436836-tpbibiotheque-serviceweb.onrender.com/api/prets/1/statut",
+              "protocol": "https",
+              "host": [
+                "two436836-tpbibiotheque-serviceweb",
+                "onrender",
+                "com"
+              ],
+              "path": [
+                "api",
+                "prets",
+                "1",
+                "statut"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Surprimer Prêt",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "cle_api cle-test-123",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://two436836-tpbibiotheque-serviceweb.onrender.com/api/prets/1",
+              "protocol": "https",
+              "host": [
+                "two436836-tpbibiotheque-serviceweb",
+                "onrender",
+                "com"
+              ],
+              "path": [
+                "api",
+                "prets",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Monfier Prêt",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "cle_api cle-test-123",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"nom_emprunteur\": \"Maxime Laurin\",\r\n    \"date_retour_prevue\": \"2026-05-15\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://two436836-tpbibiotheque-serviceweb.onrender.com/api/prets/3",
+              "protocol": "https",
+              "host": [
+                "two436836-tpbibiotheque-serviceweb",
+                "onrender",
+                "com"
+              ],
+              "path": [
+                "api",
+                "prets",
+                "3"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseURL",
+      "value": "",
+      "type": "default"
+    }
+  ]
+}
