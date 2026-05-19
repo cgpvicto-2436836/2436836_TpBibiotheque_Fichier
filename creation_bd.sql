@@ -1,13 +1,12 @@
 -- Épreuve finale : Services Web - Hiver 2026
--- Script de création de la base de données (PostgreSQL)
+-- Script de création de la base de données bibliotheques (PostgreSQL)
 
--- Nettoyage des tables existantes (l'ordre est important à cause des clés étrangères)
 DROP TABLE IF EXISTS prets CASCADE;
 DROP TABLE IF EXISTS livres CASCADE;
 DROP TABLE IF EXISTS bibliotheques CASCADE;
 DROP TABLE IF EXISTS utilisateurs CASCADE;
 
--- 1. Table Utilisateurs
+-- Table Utilisateurs
 CREATE TABLE utilisateurs (
     id           SERIAL PRIMARY KEY,
     courriel     VARCHAR(255) NOT NULL UNIQUE,
@@ -16,14 +15,14 @@ CREATE TABLE utilisateurs (
     cree_le      TIMESTAMP    DEFAULT CURRENT_TIMESTAMP
 );
 
--- 2. Table Bibliotheques
+-- Table Bibliotheques
 CREATE TABLE bibliotheques (
     id             SERIAL PRIMARY KEY,
     nom            VARCHAR(255) NOT NULL,
     utilisateur_id INT          NOT NULL REFERENCES utilisateurs(id) ON DELETE CASCADE
 );
 
--- 3. Table Livres
+-- Table Livres
 CREATE TABLE livres (
     id              SERIAL PRIMARY KEY,
     titre           VARCHAR(255) NOT NULL,
@@ -36,7 +35,7 @@ CREATE TABLE livres (
     bibliotheque_id INT          NOT NULL REFERENCES bibliotheques(id) ON DELETE CASCADE
 );
 
--- 4. Table Prets
+-- Table Prets
 CREATE TABLE prets (
     id                 SERIAL PRIMARY KEY,
     livre_id           INT          NOT NULL REFERENCES livres(id) ON DELETE CASCADE,
